@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends MX_Controller {
+class Generate extends MX_Controller {
 
 	public function __construct()
     {
@@ -12,7 +12,7 @@ class Admin extends MX_Controller {
 	public function index()
 	{
     $data = array(
-      'Content_View' => 'Admin/Admin_View'
+      'Content_View' => 'Generate/Generate_View'
   );
   
     $this->load->view('_Layout/_Layout_Portal_1A',$data);
