@@ -27,13 +27,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Main CSS-->
 	<link href="<?=base_url()?>assets/css/theme.css" rel="stylesheet" media="all">
 	<link href="<?=base_url()?>assets/lib/jquery.multi-select/css/multi-select.css" rel="stylesheet" media="all">
-	
+
 </head>
     <!-- Jquery JS-->
     <script src="<?=base_url()?>assets/lib/jquery/dist/jquery.min.js"></script>
 	<script src="<?=base_url()?>assets/lib/jquery.multi-select/js/jquery.multi-select.js"></script>
 <body class="animsition">
- 
+
 <div class="page-wrapper">
      <!-- HEADER MOBILE-->
      <header class="header-mobile d-block d-lg-none">
@@ -162,12 +162,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                      
+
                         <li>
                             <a href="#">
                                 <i class="fas fa-clone"></i>Generate</a>
                         </li>
-                       
+
                     </ul>
                 </nav>
             </div>
@@ -341,17 +341,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>
             </header>
-            <!-- END HEADER DESKTOP-->    
-    
-            <!-- MAIN CONTENT-->
-            <div class="main-content">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
+            <!-- END HEADER DESKTOP-->
+
+
                             <?php $this->load->view($Content_View);?>
-                    </div>
-                </div>
-            </div>
-        <!-- END PAGE CONTAINER-->
+              
 
     </div>
 </div>
@@ -362,20 +356,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?=base_url()?>assets/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="<?=base_url()?>assets/vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
-    <script src="<?=base_url()?>assets/vendor/slick/slick.min.js">
-    </script>
+    <script src="<?=base_url()?>assets/vendor/slick/slick.min.js"></script>
     <script src="<?=base_url()?>assets/vendor/wow/wow.min.js"></script>
     <script src="<?=base_url()?>assets/vendor/animsition/animsition.min.js"></script>
-    <script src="<?=base_url()?>assets/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
+    <script src="<?=base_url()?>assets/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <script src="<?=base_url()?>assets/vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="<?=base_url()?>assets/vendor/counter-up/jquery.counterup.min.js">
-    </script>
+    <script src="<?=base_url()?>assets/vendor/counter-up/jquery.counterup.min.js"></script>
     <script src="<?=base_url()?>assets/vendor/circle-progress/circle-progress.min.js"></script>
     <script src="<?=base_url()?>assets/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="<?=base_url()?>assets/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="<?=base_url()?>assets/vendor/select2/select2.min.js">
-    </script>
+    <script src="<?=base_url()?>assets/vendor/select2/select2.min.js"></script>
 
     <!-- Main JS-->
     <script src="<?=base_url()?>assets/js/main.js"></script>

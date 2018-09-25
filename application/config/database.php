@@ -76,13 +76,13 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => '',
+	'username' => 'root',
 	'password' => '',
-	'database' => '',
+	'database' => 'sr_api',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
+	'db_debug' => (ENVIRONMENT !== 'development'),
 	'cache_on' => FALSE,
 	'cachedir' => '',
 	'char_set' => 'utf8',
@@ -93,52 +93,4 @@ $db['default'] = array(
 	'stricton' => FALSE,
 	'failover' => array(),
 	'save_queries' => TRUE
-);
-
-
-$db['mssql'] = array(
-    'dsn'    => 'sqlsrv:server=103.245.167.107,1984;Database=CRR03',
-    'hostname' => '',
-    'username' => 'sa',
-    'password' => 'project100*',
-    'database' => '',
-    'dbdriver' => 'pdo',
-    'dbprefix' => '',
-    'pconnect' => FALSE,
-    'db_debug' => TRUE,
-    'cache_on' => FALSE,
-    'cachedir' => '',
-    'char_set' => 'utf8',
-    'dbcollat' => 'utf8_general_ci',
-    'swap_pre' => '',
-    'autoinit' => TRUE,
-    'encrypt' => FALSE,
-    'compress' => FALSE,
-    'stricton' => FALSE,
-    'failover' => array(),
-    'save_queries' => TRUE
-);
-
-#oracle pass : admin1234
-
-$db['oracle'] = array(
-    'hostname' => '192.168.1.23/xe',
-    'username' => 'system',
-    'password' => 'oracle',
-    //'database' => '',
-    'dbdriver' => 'oci8',
-    'dbprefix' => '',
-    'pconnect' => FALSE,
-    'db_debug' => TRUE,
-    'cache_on' => FALSE,
-    'cachedir' => '',
-    'char_set' => 'utf8',
-    'dbcollat' => 'utf8_general_ci',
-    'swap_pre' => '',
-    'autoinit' => TRUE,
-    'encrypt' => FALSE,
-    'compress' => FALSE,
-    'stricton' => FALSE,
-    'failover' => array(),
-    'save_queries' => TRUE
 );

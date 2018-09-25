@@ -4,20 +4,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Generate extends MX_Controller {
 
 	public function __construct()
-    {
+  {
       parent::__construct();
+			$this->load->library(array('session'));
       $this->load->helper('url');
       $this->load->helper('file');
-    }
+
+			if (!$this->session->logged_in) {
+				redirect('login', 'refresh');
+			}
+  }
 	public function index()
 	{
     $data = array(
       'Content_View' => 'Generate/Generate_View'
   );
-  
+
     $this->load->view('_Layout/_Layout_Portal_1A',$data);
     //$this->load->view('welcome_message');
-   
+
   }
   public function generate()
     {
@@ -29,8 +34,8 @@ class Generate extends MX_Controller {
       $this->mkController($nProject);
       $this->mkModel($nProject,$nDatabase);
       $this->mkView( $nProject,$dataView);
-      
-      
+
+
     }
   public function mkFolder($fname)
   {
@@ -95,14 +100,14 @@ class Generate extends MX_Controller {
           $data .= '$this->oracle = $this->load->database ( "oracle", TRUE );';
             break;
           case '2':
-          $data .= '$this->mssql = $this->load->database ( "mssql", TRUE );'; 
+          $data .= '$this->mssql = $this->load->database ( "mssql", TRUE );';
             break;
         }
     $data .= '
       }
 
     }
-        
+
     ';
     if ( ! write_file('../application/modules/'.$fname.'/models/'.ucfirst($fname).'_model.php', $data))
     {
@@ -113,7 +118,7 @@ class Generate extends MX_Controller {
             echo 'File written!';
     }
     }
-    
+
   }
   public function mkView($fname,$data)
   {
@@ -136,21 +141,21 @@ class Generate extends MX_Controller {
     <head>
       <meta charset="utf-8">
       <title>Welcome to ZT Project</title>
-    
+
     ';
     foreach ($arr as $key => $value) {
         #css
           switch ($value) {
             case '2':
-              $body .= ' 
+              $body .= '
               <link href="<?=base_url()?>assets/lib/bootstrap4/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css">';
               break;
             case '3':
-              $body .= ' 
+              $body .= '
               <link href="<?=base_url()?>assets/lib/DataTables/css/jquery.dataTables.css" media="screen" rel="stylesheet" type="text/css">';
               break;
             case '4':
-              $body .= ' 
+              $body .= '
               <link href="<?=base_url()?>assets/lib/fontawesome-free-5.0.13/web-fonts-with-css/css/fontawesome-all.css" media="screen" rel="stylesheet" type="text/css">';
               break;
           }
@@ -205,7 +210,7 @@ class Generate extends MX_Controller {
      }
     $body .= '
     </html>';
-    
+
     return $body;
   }
 }
