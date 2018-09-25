@@ -1,0 +1,7 @@
+{
+    "require": {
+        "league/oauth2-client": "^2.3",
+        "tmw/fpdm": "^2.9",
+        "mikehaertl/php-pdftk": "^0.4.4"
+    }
+}
