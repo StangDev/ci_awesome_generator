@@ -46,7 +46,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="<?=base_url()?>/assets/images/logoweb.png" alt="Cool Admin" />
+                            <img src="<?=base_url()?>/assets/images/logoapi.png" alt="Cool Admin" width="75" height="75"/>
+                            Awesome CI
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -159,9 +160,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
-            <div class="logo">
+            <div class="logo  align-items-center justify-content-center">
                 <a href="#">
-                    <img src="<?=base_url()?>/assets/images/logoweb.png" alt="Cool Admin" />
+                    <img src="<?=base_url()?>/assets/images/logoapi.png" alt="Cool Admin" width="75" height="75" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -183,7 +184,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <header class="header-desktop">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div class="header-wrap float-right">
+                        <div class="header-wrap ">
+                        <div class="col-1 col-sm-6"></div>
                             <div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -297,7 +299,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </div>
                                     </div>
                                 </div>
-                                <div class="account-wrap">
+                                <div class="account-wrap ">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
                                             <img src="<?=base_url()?>/assets/images/avatar/<?=$this->session->avatar?>"
