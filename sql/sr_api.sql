@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2018 at 07:47 PM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.3
+-- Generation Time: Sep 26, 2018 at 11:58 AM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,6 +34,21 @@ CREATE TABLE `ci_sessions` (
   `timestamp` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_config`
+--
+
+CREATE TABLE `table_config` (
+  `id` varchar(36) NOT NULL,
+  `modules` varchar(255) NOT NULL,
+  `table_name` varchar(255) NOT NULL,
+  `active` varchar(4) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -71,6 +86,12 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `avatar`, `created_a
 ALTER TABLE `ci_sessions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `ci_sessions_timestamp` (`timestamp`);
+
+--
+-- Indexes for table `table_config`
+--
+ALTER TABLE `table_config`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
