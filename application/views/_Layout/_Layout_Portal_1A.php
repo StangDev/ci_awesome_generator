@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 
 <head>
     <meta charset="utf-8">
@@ -32,13 +32,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link href="<?=base_url()?>/assets/lib/jquery.multi-select/css/multi-select.css" rel="stylesheet" media="all">
     <link href="<?=base_url()?>/assets/lib/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" media="all">
 </head>
-<!-- Jquery JS-->
-<script src="<?=base_url()?>/assets/lib/jquery/dist/jquery.min.js"></script>
-<script src="<?=base_url()?>/assets/lib/jquery.multi-select/js/jquery.multi-select.js"></script>
-<script src="<?=base_url()?>/assets/js/coregen.js"></script>
 
 <body class="animsition">
-
+  <!-- Jquery JS-->
+  <script src="<?=base_url()?>/assets/lib/jquery/dist/jquery.min.js"></script>
+  <script src="<?=base_url()?>/assets/lib/jquery.multi-select/js/jquery.multi-select.js"></script>
+  <script src="<?=base_url()?>/assets/js/coregen.js"></script>
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
@@ -352,66 +351,55 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>
             </header>
-            <!-- END HEADER DESKTOP-->
-              <div style="padding-top:4em;display:none">
-                <div class="alert alert-success alert-dismissible fade show" role="alert" id="pnlAlertSuccess">
-                    <span></span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <link aria-hidden="true">&times;</link>
-                    </button>
-                </div>
-                <div class="alert alert-info alert-dismissible fade show" role="alert" id="pnlAlertInfo">
-                    <span></span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <link aria-hidden="true">&times;</link>
-                    </button>
-                </div>
-                <div class="alert alert-warning alert-dismissible fade show" role="alert" id="pnlAlertWarning">
-                    <span></span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <link aria-hidden="true">&times;</link>
-                    </button>
-                </div>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert" id="pnlAlertDanger">
-                    <span></span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <link aria-hidden="true">&times;</link>
-                    </button>
-                </div>
-
+            <div style="padding-top:4em;display:none">
+              <div class="alert alert-success alert-dismissible fade show" role="alert" id="pnlAlertSuccess">
+                  <span></span>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <link aria-hidden="true">&times;</link>
+                  </button>
+              </div>
+              <div class="alert alert-info alert-dismissible fade show" role="alert" id="pnlAlertInfo">
+                  <span></span>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <link aria-hidden="true">&times;</link>
+                  </button>
+              </div>
+              <div class="alert alert-warning alert-dismissible fade show" role="alert" id="pnlAlertWarning">
+                  <span></span>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <link aria-hidden="true">&times;</link>
+                  </button>
+              </div>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert" id="pnlAlertDanger">
+                  <span></span>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <link aria-hidden="true">&times;</link>
+                  </button>
+              </div>
             </div>
-
+            <!-- END HEADER DESKTOP-->
             <?php $this->load->view($Content_View);?>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="copyright">
-                        <p>Copyright © 2018 Tankorn. All rights reserved.</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-
+  <!-- Bootstrap JS-->
+  <script src="<?=base_url()?>/assets/vendor/bootstrap-4.1/popper.min.js"></script>
+  <script src="<?=base_url()?>/assets/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+  <!-- Vendor JS       -->
+  <script src="<?=base_url()?>/assets/vendor/slick/slick.min.js"></script>
+  <script src="<?=base_url()?>/assets/vendor/wow/wow.min.js"></script>
+  <script src="<?=base_url()?>/assets/vendor/animsition/animsition.min.js"></script>
+  <script src="<?=base_url()?>/assets/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+  <script src="<?=base_url()?>/assets/vendor/counter-up/jquery.waypoints.min.js"></script>
+  <script src="<?=base_url()?>/assets/vendor/counter-up/jquery.counterup.min.js"></script>
+  <script src="<?=base_url()?>/assets/vendor/circle-progress/circle-progress.min.js"></script>
+  <script src="<?=base_url()?>/assets/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="<?=base_url()?>/assets/vendor/chartjs/Chart.bundle.min.js"></script>
+  <script src="<?=base_url()?>/assets/vendor/select2/select2.min.js"></script>
+  <!-- Lib JS       -->
+  <script src="<?=base_url()?>/assets/lib/DataTables/js/jquery.dataTables.min.js"></script>
+  <!-- Main JS-->
+  <script src="<?=base_url()?>/assets/js/main.js"></script>
 </body>
-
-<!-- Bootstrap JS-->
-<script src="<?=base_url()?>/assets/vendor/bootstrap-4.1/popper.min.js"></script>
-<script src="<?=base_url()?>/assets/vendor/bootstrap-4.1/bootstrap.min.js"></script>
-<!-- Vendor JS       -->
-<script src="<?=base_url()?>/assets/vendor/slick/slick.min.js"></script>
-<script src="<?=base_url()?>/assets/vendor/wow/wow.min.js"></script>
-<script src="<?=base_url()?>/assets/vendor/animsition/animsition.min.js"></script>
-<script src="<?=base_url()?>/assets/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-<script src="<?=base_url()?>/assets/vendor/counter-up/jquery.waypoints.min.js"></script>
-<script src="<?=base_url()?>/assets/vendor/counter-up/jquery.counterup.min.js"></script>
-<script src="<?=base_url()?>/assets/vendor/circle-progress/circle-progress.min.js"></script>
-<script src="<?=base_url()?>/assets/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-<script src="<?=base_url()?>/assets/vendor/chartjs/Chart.bundle.min.js"></script>
-<script src="<?=base_url()?>/assets/vendor/select2/select2.min.js"></script>
-<!-- Lib JS       -->
-<script src="<?=base_url()?>/assets/lib/DataTables/js/jquery.dataTables.min.js"></script>
-<!-- Main JS-->
-<script src="<?=base_url()?>/assets/js/main.js"></script>
 
 </html>

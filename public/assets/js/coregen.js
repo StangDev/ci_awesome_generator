@@ -64,7 +64,7 @@ function AlertShow(pnl, msg, defaultMsg) {
 ////////////////////////// AJAX Functions //////////////////////////////////
 function AjaxGetRequest(path, successFunc, failFunc) {
     $.ajax({
-        url: GetUnix(path),
+        url: path,
         type: 'GET',
         //headers: { 'Authorization': "Bearer " + token },
         contentType: 'application/json; charset=utf-8',
@@ -201,7 +201,7 @@ function UploadImage(file, hid_uploadurl, downloadurl) {
     myFormData.append('files', file_data);
     var successFunc = function (response) {
         hid_uploadurl.val(response.filesUploaded[0]);
-        if (downloadurl) { 
+        if (downloadurl) {
         downloadurl.attr("href", apisite + "/" + response.filesUploaded[0]);
     }
     }
@@ -219,7 +219,7 @@ function readURL(input, image) {
 
         reader.readAsDataURL(input.files[0]);
     }
-} 
+}
 
 function setupUploadEvent() {
     $(document).on('change', '.btn-file :file', function () {
@@ -246,5 +246,3 @@ function hasExtension(inputID, exts) {
     var fileName = document.getElementById(inputID).value;
     return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test(fileName);
 }
-
-

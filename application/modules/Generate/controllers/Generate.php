@@ -10,6 +10,7 @@ class Generate extends MX_Controller {
       $this->load->helper('url');
       $this->load->helper('file');
       $this->load->helper('form');
+			$this->load->model('Generate_model');
 			if (!$this->session->logged_in) {
 				redirect('login', 'refresh');
 			}
@@ -23,23 +24,68 @@ class Generate extends MX_Controller {
     $this->load->view('_Layout/_Layout_Portal_1A',$data);
 
   }
-  public function formGen(Type $var = null)
+  public function formGen($id='')
   {
-      $data = array(
-        'Content_View' => 'Generate/generate_form_view'
-    );
+		if (!empty($id)) {
+				$data = array(
+        'Content_View' => 'Generate/generate_form_view',
+				'rowdata' => $data = $this->Generate_model->getDatabaseById($id)
+    	 );
 
       $this->load->view('_Layout/_Layout_Portal_1A',$data);
-  }
-  public function AddDatabase()
-  {
-    
-    $post =  json_decode($this->input->raw_input_stream);
-    $post->id = $this->getGUID();
-    echo json_encode($post);
+		}else {
+		  show_404();
+		}
 
-    
   }
+  public function insertDatabase()
+  {
+    if ($this->input->method()=='post') {
+			$post =  json_decode($this->input->raw_input_stream);
+	    $post->id = $this->getGUID();
+	    $mss = $this->Generate_model->addDatabase($post);
+			echo json_encode(array('mssage' => $mss, ));
+    }else {
+    	show_404();
+    }
+  }
+	public function getDatabase($id='')
+	{
+		if ($this->input->method()=='get') {
+			if (!empty($id)) {
+				$data = $this->Generate_model->getDatabaseById($id);
+				echo json_encode($data);
+			}else {
+				$data = $this->Generate_model->getDatabase();
+				echo json_encode($data);
+			}
+    }else {
+    	show_404();
+    }
+
+	}
+	public function updateDatabase()
+	{
+		if ($this->input->method()=='put') {
+			$put =  json_decode($this->input->raw_input_stream);
+			$mss = $this->Generate_model->updateDatabase($put);
+			echo json_encode(array('mssage' => $mss, ));
+		}else {
+			show_404();
+		}
+
+	}
+	public function deleteDatabase()
+	{
+		if ($this->input->method()=='delete') {
+			$delete =  json_decode($this->input->raw_input_stream);
+			$mss = $this->Generate_model->deleteDatabase($delete);
+			echo json_encode(array('mssage' => $mss, ));
+		}else {
+			show_404();
+		}
+
+	}
   public function AddRow()
   {
      print_r($_POST);
@@ -76,5 +122,5 @@ class Generate extends MX_Controller {
         return $uuid;
     }
 }
- 
+
 }

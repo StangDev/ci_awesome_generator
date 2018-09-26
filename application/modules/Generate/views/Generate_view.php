@@ -10,13 +10,13 @@
         <div class="table-data__tool float-right">
               <div class="table-data__tool-right">
                 <button type="button" class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal"
-                  data-target="#AddItem" onclick="clearFrom()">
+                  data-target="#AddItem" onclick="goCreate()">
                   <i class="zmdi zmdi-plus"></i>add item
                 </button>
 
               </div>
             </div>
-              <table class="table table-borderless table-striped table-earning" id="myTable">
+              <table class="table table-borderless table-striped table-earning" id="myTable" align="center">
                 <thead>
                   <tr>
                     <th>modules</th>
@@ -38,6 +38,8 @@
   </div>
 </div>
 <!-- END PAGE CONTAINER-->
+
+
 <!-- modal medium -->
 <div class="modal fade" id="AddItem" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
   <div class="modal-dialog " role="document">
@@ -49,6 +51,7 @@
         </button>
       </div>
       <div class="modal-body">
+        <input type="text" id="item-id" class="form-control" hidden>
         <div class="form-group">
           <label for="company" class=" form-control-label">Name modules</label>
           <input type="text" id="item-modules" class="form-control">
@@ -68,90 +71,33 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addRow()">Confirm</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="Generate_PutUpdate()">Confirm</button>
       </div>
     </div>
   </div>
 </div>
 <!-- end modal medium -->
+<!-- modal small -->
+<div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>
+          คุนต้องการลบหรือไม่?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal small -->
 
+<script src="<?=base_url()?>/assets/js/generate.js"></script>
 <script>
   $(document).ready(function () {
-    $('#myTable').DataTable({
-      "columnDefs": [ 
-        {
-                "targets": 2,
-                "data": "id",
-                "render": function (data, type, row, meta) {
-                  
-                    if (row[2]) {
-                        return '<span class="status--process">Yes</span>';    
-                    } else {
-                        return '<span class="status--denied">No</span>';   
-                    }
-                    
-                    
-                }
-        },
-        {
-                "targets": -1,
-                "data": "id",
-                "render": function (data, type, row, meta) {
-                    var tmp ="'";
-                    return '<div class="table-data-feature"><button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick="goEdit('+tmp+row[3]+tmp+')">  <i class="zmdi zmdi-edit"></i></button><button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="goDelete('+tmp+row[3]+tmp+')"><i class="zmdi zmdi-delete"></i></div>';
-                    
-                }
-        },
-      ],
-    "language": {
-            "emptyTable": "ไม่พบข้อมูล ",
-            "zeroRecords": "ไม่พบข้อมูลตามเงื่อนไขที่กำหนด"
-        },
-        "paging": true
-
-    });
+    Generate_InitiateAjaxLayout();
   });
-
-function goDelete(id) {
-    alert("Delete: "+id);
-}
-function goEdit(id) {
-    alert("Edit: "+id);
-}
-  function clearFrom() {
-    $('#item-modules').val('');
-    $('#item-table').val('');
-    $("#item-active").prop("checked", false);
-  }
-
-  function addRow() {
-    var item_modules = $('#item-modules').val();
-    var item_table = $('#item-table').val();
-    var item_active = ($('#item-active').is(":checked")) ? true : false;
-  
-     var successFunc = function (result) {
-         console.log("result",result);
-         
-        var table = $('#myTable').DataTable();
-            table.row.add([
-                result.modules,
-                result.table,
-                result.active,
-                result.id
-            ]).draw(false);
-        };
-    AjaxPostRequest('<?=base_url()?>generate/AddDatabase', {"modules":item_modules,"table":item_table,"active":item_active}, successFunc, AlertDanger);
-  }
-
-  function gen() {
-    var table = $('#myTable').DataTable();
-    var data = table.rows().data().toArray();
-    console.log("data",data);
-    var json = JSON.stringify(data);
-    console.log("json",json);
-    
-    $.post("/generate/gen",json, function (respone) {
-      console.log("respone",respone);
-    });
-  }
 </script>

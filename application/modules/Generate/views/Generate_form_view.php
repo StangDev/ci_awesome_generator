@@ -2,26 +2,29 @@
 <div class="main-content">
   <div class="section__content section__content--p30">
     <div class="container-fluid">
+        <button type="button" class="btn btn-secondary mb-3" onclick="javascript:window.history.back();">Go Back</button>
       <div class="card">
         <div class="card-header">
           Welcome to Generate Project
         </div>
         <div class="card-body">
           <form>
+            <?php foreach ($rowdata as $key => $value):?>
             <div class="form-group row">
               <label for="nameProject" class="col-sm-2 col-form-label">Modules :</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="nameProject" placeholder="" disabled>
+                <input type="text" class="form-control" id="nameProject" placeholder="" value="<?=$value['modules']?>" disabled>
 
               </div>
             </div>
             <div class="form-group row">
               <label for="nameProject" class="col-sm-2 col-form-label">Database :</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputSelectDatabase" placeholder="" disabled>
+                <input type="text" class="form-control" id="inputSelectDatabase" value="<?=$value['table_name']?>" placeholder="" disabled>
 
               </div>
             </div>
+          <?php endforeach; ?>
           </form>
         </div>
       </div>
@@ -111,14 +114,14 @@
 <script>
   $(document).ready(function () {
     $('#myTable').DataTable({
-      "columnDefs": [ 
+      "columnDefs": [
         {
                 "targets": 4,
                 "data": "id",
                 "render": function (data, type, row, meta) {
-                  
+
                     return '<span class="status--process">' + row[4] + '</span>';
-                    
+
                 }
         },
         {
@@ -126,7 +129,7 @@
                 "data": "id",
                 "render": function (data, type, row, meta) {
                     return '<div class="table-data-feature"><button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">  <i class="zmdi zmdi-edit"></i></button><button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="zmdi zmdi-delete"></i></div>';
-                    
+
                 }
         },
       ],
@@ -169,7 +172,7 @@
     console.log("data",data);
     var json = JSON.stringify(data);
     console.log("json",json);
-    
+
     $.post("/generate/gen",json, function (respone) {
       console.log("respone",respone);
     });
