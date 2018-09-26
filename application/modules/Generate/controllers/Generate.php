@@ -9,7 +9,7 @@ class Generate extends MX_Controller {
 			$this->load->library(array('session'));
       $this->load->helper('url');
       $this->load->helper('file');
-
+      $this->load->helper('form');
 			if (!$this->session->logged_in) {
 				redirect('login', 'refresh');
 			}
@@ -17,26 +17,35 @@ class Generate extends MX_Controller {
 	public function index()
 	{
     $data = array(
-      'Content_View' => 'Generate/Generate_View'
+      'Content_View' => 'Generate/generate_view',
   );
 
     $this->load->view('_Layout/_Layout_Portal_1A',$data);
-    //$this->load->view('welcome_message');
 
   }
-  public function generate()
-    {
+  public function formGen(Type $var = null)
+  {
+      $data = array(
+        'Content_View' => 'Generate/generate_form_view'
+    );
+
+      $this->load->view('_Layout/_Layout_Portal_1A',$data);
+  }
+  public function AddDatabase()
+  {
+    
+    $post =  json_decode($this->input->raw_input_stream);
+    $post->id = $this->getGUID();
+    echo json_encode($post);
+
+    
+  }
+  public function AddRow()
+  {
      print_r($_POST);
-      $nProject = $_POST['nProject'];
-      $nDatabase = $_POST['nDatabase'];
-      $dataView = $this->indexView($_POST['nPlugin']);
-      $this->mkFolder($nProject);
-      $this->mkController($nProject);
-      $this->mkModel($nProject,$nDatabase);
-      $this->mkView( $nProject,$dataView);
 
 
-    }
+  }
   public function mkFolder($fname)
   {
     if (!file_exists('../application/modules/'.$fname)) {
@@ -52,165 +61,20 @@ class Generate extends MX_Controller {
       mkdir('../application/modules/'.$fname.'/views', 0777, true);
     }
   }
-  public function mkController($fname)
-  {
-    $dataCon = '<?php
-    class '.$fname.' extends MX_Controller {
-      public function __construct()
-      {
-        parent::__construct();
-        $this->load->helper("form");
-        $this->load->helper("url");
-        #$this->load->model("'.$fname.'_model"); //config DB ก่อนเปิดใช้
-      }
-      public function index()
-      {
-        $this->load->view("'.$fname.'_view");
-      }
+  function getGUID(){
+    if (function_exists('com_create_guid')){
+        return com_create_guid();
+    }else{
+        mt_srand((double)microtime()*10000);//optional for php 4.2.0 and up.
+        $charid = strtoupper(md5(uniqid(rand(), true)));
+        $hyphen = chr(45);// "-"
+        $uuid = substr($charid, 0, 8).$hyphen
+            .substr($charid, 8, 4).$hyphen
+            .substr($charid,12, 4).$hyphen
+            .substr($charid,16, 4).$hyphen
+            .substr($charid,20,12);
+        return $uuid;
     }
-    ';
-    if ( ! write_file('../application/modules/'.$fname.'/controllers/'.ucfirst($fname).'.php', $dataCon))
-    {
-            echo 'Unable to write the file';
-    }
-    else
-    {
-            echo 'File written!';
-    }
-  }
-  public function mkModel($fname, $nDatabase)
-  {
-    if ( $nDatabase != '') {
-      $data = '
-        <?php
-    defined("BASEPATH") OR exit("No direct script access allowed");
-
-    class '.$fname.' extends CI_Model{
-
-      public function __construct()
-      {
-        parent::__construct();
-
-    ';
-        switch ($nDatabase) {
-          case '0':
-           $data .= '$this->mysql = $this->load->database ( "mysql", TRUE );';
-            break;
-          case '1':
-          $data .= '$this->oracle = $this->load->database ( "oracle", TRUE );';
-            break;
-          case '2':
-          $data .= '$this->mssql = $this->load->database ( "mssql", TRUE );';
-            break;
-        }
-    $data .= '
-      }
-
-    }
-
-    ';
-    if ( ! write_file('../application/modules/'.$fname.'/models/'.ucfirst($fname).'_model.php', $data))
-    {
-            echo 'Unable to write the file';
-    }
-    else
-    {
-            echo 'File written!';
-    }
-    }
-
-  }
-  public function mkView($fname,$data)
-  {
-    if ( ! write_file('../application/modules/'.$fname.'/views/'.ucfirst($fname).'_view.php', $data))
-    {
-            echo 'Unable to write the file';
-    }
-    else
-    {
-            echo 'File written!';
-    }
-  }
-  public function indexView($arr=array())
-  {
-    $body = '
-    <?php
-    defined("BASEPATH") OR exit("No direct script access allowed");
-    ?><!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <title>Welcome to ZT Project</title>
-
-    ';
-    foreach ($arr as $key => $value) {
-        #css
-          switch ($value) {
-            case '2':
-              $body .= '
-              <link href="<?=base_url()?>assets/lib/bootstrap4/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css">';
-              break;
-            case '3':
-              $body .= '
-              <link href="<?=base_url()?>assets/lib/DataTables/css/jquery.dataTables.css" media="screen" rel="stylesheet" type="text/css">';
-              break;
-            case '4':
-              $body .= '
-              <link href="<?=base_url()?>assets/lib/fontawesome-free-5.0.13/web-fonts-with-css/css/fontawesome-all.css" media="screen" rel="stylesheet" type="text/css">';
-              break;
-          }
-    }
-     $body .= '
-          </head>
-          <body>
-        <div class="container-fluid">
-          <div class="card text-center">
-          <div class="card-header">
-            Hub.ztdev.com
-          </div>
-          <div class="card-body">
-            <h1 class="card-title">Hello world</h1>
-          </div>
-          <div class="card-footer text-muted">
-          </div>
-        </div>
-        </div>
-          </body>
-    ';
-    foreach ($arr as $key => $value) {
-      #js
-        switch ($value) {
-          case '0':
-            $body .= '
-            <script src="<?=base_url()?>assets/lib/jquery/dist/jquery.min.js"></script>';
-            break;
-          case '6':
-            $body .= '
-            <script src="<?=base_url()?>assets/lib/jquery-ui-1.12.1/jquery-ui.min.js"></script>';
-            break;
-            break;
-          case '1':
-            $body .= '
-            <script src="<?=base_url()?>assets/lib/bootstrap4/js/bootstrap.min.js"></script>';
-            break;
-          case '2':
-            $body .= '
-            <script src="<?=base_url()?>assets/lib/jquery.multi-select/js/jquery.multi-select.js"></script>';
-            break;
-          case '3':
-          $body .= '
-          <script src="<?=base_url()?>assets/lib/DataTables/js/jquery.dataTables.js"></script>';
-            break;
-          case '5':
-          $body .= '
-          <script src="<?=base_url()?>assets/lib/formBuilder/dist/form-builder.min.js"></script>
-          <script src="<?=base_url()?>assets/lib/formBuilder/dist/form-render.min.js"></script>';
-            break;
-        }
-     }
-    $body .= '
-    </html>';
-
-    return $body;
-  }
+}
+ 
 }

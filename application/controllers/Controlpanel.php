@@ -110,9 +110,11 @@ class Controlpanel extends CI_Controller {
 				// set session user datas
 				$_SESSION['user_id']      = (int)$user->id;
 				$_SESSION['username']     = (string)$user->username;
+				$_SESSION['email']     	  = (string)$user->email;
 				$_SESSION['logged_in']    = (bool)true;
 				$_SESSION['is_confirmed'] = (bool)$user->is_confirmed;
 				$_SESSION['is_admin']     = (bool)$user->is_admin;
+				$_SESSION['avatar']       = (string)$user->avatar;
 
 				// user login ok
 				$data->Content_View  = "user/login/login_success";

@@ -4,6 +4,29 @@
     <div class="container-fluid">
       <div class="card">
         <div class="card-header">
+          Welcome to Generate Project
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="form-group row">
+              <label for="nameProject" class="col-sm-2 col-form-label">Modules :</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="nameProject" placeholder="" disabled>
+
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="nameProject" class="col-sm-2 col-form-label">Database :</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputSelectDatabase" placeholder="" disabled>
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
           Database
         </div>
         <div class="card-body">
@@ -19,9 +42,11 @@
               <table class="table table-borderless table-striped table-earning" id="myTable">
                 <thead>
                   <tr>
-                    <th>modules</th>
-                    <th>table</th>
-                    <th>active</th>
+                    <th>name</th>
+                    <th>type</th>
+                    <th>size</th>
+                    <th>description</th>
+                    <th>PK</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -50,17 +75,25 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="company" class=" form-control-label">Name modules</label>
-          <input type="text" id="item-modules" class="form-control">
+          <label for="company" class=" form-control-label">Name</label>
+          <input type="text" id="item-name" class="form-control">
         </div>
         <div class="form-group">
-          <label for="company" class=" form-control-label">Name Table Database</label>
-          <input type="text" id="item-table" class="form-control">
+          <label for="company" class=" form-control-label">Type</label>
+          <input type="text" id="item-type" class="form-control">
         </div>
         <div class="form-group">
-          <label for="company" class=" form-control-label">is Active</label>
+          <label for="company" class=" form-control-label">Size</label>
+          <input type="number" id="item-size" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="company" class=" form-control-label">Description</label>
+          <input type="text" id="item-des" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="company" class=" form-control-label">is PK</label>
           <label class="au-checkbox">
-            <input type="checkbox" id="item-active">
+            <input type="checkbox" id="item-pk">
             <span class="au-checkmark"></span>
           </label>
         </div>
@@ -80,16 +113,11 @@
     $('#myTable').DataTable({
       "columnDefs": [ 
         {
-                "targets": 2,
+                "targets": 4,
                 "data": "id",
                 "render": function (data, type, row, meta) {
                   
-                    if (row[2]) {
-                        return '<span class="status--process">Yes</span>';    
-                    } else {
-                        return '<span class="status--denied">No</span>';   
-                    }
-                    
+                    return '<span class="status--process">' + row[4] + '</span>';
                     
                 }
         },
@@ -97,8 +125,7 @@
                 "targets": -1,
                 "data": "id",
                 "render": function (data, type, row, meta) {
-                    var tmp ="'";
-                    return '<div class="table-data-feature"><button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick="goEdit('+tmp+row[3]+tmp+')">  <i class="zmdi zmdi-edit"></i></button><button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" onclick="goDelete('+tmp+row[3]+tmp+')"><i class="zmdi zmdi-delete"></i></div>';
+                    return '<div class="table-data-feature"><button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">  <i class="zmdi zmdi-edit"></i></button><button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="zmdi zmdi-delete"></i></div>';
                     
                 }
         },
@@ -112,35 +139,28 @@
     });
   });
 
-function goDelete(id) {
-    alert("Delete: "+id);
-}
-function goEdit(id) {
-    alert("Edit: "+id);
-}
   function clearFrom() {
-    $('#item-modules').val('');
-    $('#item-table').val('');
-    $("#item-active").prop("checked", false);
+    $('#item-name').val('');
+    $('#item-type').val('');
+    $('#item-size').val('');
+    $('#item-des').val('');
+    $("#item-pk").prop("checked", false);
   }
 
   function addRow() {
-    var item_modules = $('#item-modules').val();
-    var item_table = $('#item-table').val();
-    var item_active = ($('#item-active').is(":checked")) ? true : false;
-  
-     var successFunc = function (result) {
-         console.log("result",result);
-         
-        var table = $('#myTable').DataTable();
-            table.row.add([
-                result.modules,
-                result.table,
-                result.active,
-                result.id
-            ]).draw(false);
-        };
-    AjaxPostRequest('<?=base_url()?>generate/AddDatabase', {"modules":item_modules,"table":item_table,"active":item_active}, successFunc, AlertDanger);
+    var item_name = $('#item-name').val();
+    var item_type = $('#item-type').val();
+    var item_size = $('#item-size').val();
+    var item_des = $('#item-des').val();
+    var item_pk = ($('#item-pk').is(":checked")) ? 'Yes' : '';
+    var table = $('#myTable').DataTable();
+    table.row.add([
+      item_name,
+      item_type,
+      item_size,
+      item_des,
+      item_pk,
+     ]).draw(false);
   }
 
   function gen() {

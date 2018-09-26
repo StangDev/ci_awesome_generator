@@ -74,7 +74,6 @@ function AjaxGetRequest(path, successFunc, failFunc) {
     });
 }
 function AjaxPostRequest(path, jData, successFunc, failFunc) {
-    console.log(jData);
     $.ajax({
         url: path,
         type: 'POST',
